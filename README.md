@@ -15,7 +15,7 @@ Please see the [PredictionIO App Integration Overview](http://docs.prediction.io
 
 Ruby 1.9.3+ required!
 
-The module is published to [RubyGems](http://rubygems.org/gems/predictionio) and can be installed directly by:
+The module is published to [RubyGems](http://rubygems.org/gems/predictionio-simple) and can be installed directly by:
 
 ```sh
 gem install predictionio-simple
