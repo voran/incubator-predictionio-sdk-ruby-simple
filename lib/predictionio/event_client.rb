@@ -125,7 +125,7 @@ module PredictionIO
     #
     # Corresponding REST API method: POST /events.json
     def unset_user(uid, optional)
-      check_unset_properties(properties)
+      check_unset_properties(optional)
       create_event('$unset', 'user', uid, optional)
     end
 
@@ -149,7 +149,7 @@ module PredictionIO
     #
     # Corresponding REST API method: POST /events.json
     def unset_item(iid, optional)
-      check_unset_properties(properties)
+      check_unset_properties(optional)
       create_event('$unset', 'item', iid, optional)
     end
 
@@ -170,7 +170,7 @@ module PredictionIO
     end
 
     private
-    def check_unset_properties(properties)
+    def check_unset_properties(optional)
       optional.key?('properties') ||
         fail(ArgumentError, 'properties must be present when event is $unset')
       optional['properties'].empty? &&
