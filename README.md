@@ -1,7 +1,7 @@
 # PredictionIO Ruby SDK Simplified
 
-[![Code Climate](https://codeclimate.com/github/voran/incubator-predictionio-ruby-sdk-simple.png)](https://codeclimate.com/github/voran/incubator-predictionio-ruby-sdk-simple)
-[![Dependency Status](https://gemnasium.com/voran/incubator-predictionio-ruby-sdk-simple.svg)](https://gemnasium.com/voran/incubator-predictionio-ruby-sdk-simple)
+[![Code Climate](https://codeclimate.com/github/voran/incubator-predictionio-sdk-ruby-simple.png)](https://codeclimate.com/github/voran/incubator-predictionio-sdk-ruby-simple)
+[![Dependency Status](https://gemnasium.com/voran/incubator-predictionio-sdk-ruby-simple.svg)](https://gemnasium.com/voran/incubator-predictionio-sdk-ruby-simple)
 [![Gem Version](https://badge.fury.io/rb/predictionio-simple.svg)](http://badge.fury.io/rb/predictionio)
 
 The Ruby SDK provides a simple wrapper for the PredictionIO API.
