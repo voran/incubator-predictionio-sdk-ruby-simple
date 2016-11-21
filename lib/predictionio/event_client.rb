@@ -125,10 +125,7 @@ module PredictionIO
     #
     # Corresponding REST API method: POST /events.json
     def unset_user(uid, optional)
-      optional.key?('properties') ||
-        fail(ArgumentError, 'properties must be present when event is $unset')
-      optional['properties'].empty? &&
-        fail(ArgumentError, 'properties cannot be empty when event is $unset')
+      check_unset_properties(properties)
       create_event('$unset', 'user', uid, optional)
     end
 
@@ -152,10 +149,7 @@ module PredictionIO
     #
     # Corresponding REST API method: POST /events.json
     def unset_item(iid, optional)
-      optional.key?('properties') ||
-        fail(ArgumentError, 'properties must be present when event is $unset')
-      optional['properties'].empty? &&
-        fail(ArgumentError, 'properties cannot be empty when event is $unset')
+      check_unset_properties(properties)
       create_event('$unset', 'item', iid, optional)
     end
 
@@ -173,6 +167,14 @@ module PredictionIO
       optional['targetEntityType'] = 'item'
       optional['targetEntityId'] = iid
       create_event(action, 'user', uid, optional)
+    end
+
+    private
+    def check_unset_properties(properties)
+      optional.key?('properties') ||
+        fail(ArgumentError, 'properties must be present when event is $unset')
+      optional['properties'].empty? &&
+        fail(ArgumentError, 'properties cannot be empty when event is $unset')
     end
   end
 end
