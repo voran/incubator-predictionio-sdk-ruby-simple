@@ -18,7 +18,7 @@ Ruby 1.9.3+ required!
 The module is published to [RubyGems](http://rubygems.org/gems/predictionio) and can be installed directly by:
 
 ```sh
-gem install predictionio
+gem install predictionio-simple
 ```
 
 Or using [Bundler](http://bundler.io/) with:
@@ -37,12 +37,11 @@ Please refer to [Event Server documentation](https://docs.prediction.io/datacoll
 require 'predictionio'
 
 # Define environment variables.
-ENV['PIO_THREADS'] = '50' # For async requests.
 ENV['PIO_EVENT_SERVER_URL'] = 'http://localhost:7070'
 ENV['PIO_ACCESS_KEY'] = 'YOUR_ACCESS_KEY' # Find your access key with: `$ pio app list`.
 
 # Create PredictionIO event client.
-client = PredictionIO::EventClient.new(ENV['PIO_ACCESS_KEY'], ENV['PIO_EVENT_SERVER_URL'], Integer(ENV['PIO_THREADS']))
+client = PredictionIO::EventClient.new(ENV['PIO_ACCESS_KEY'], ENV['PIO_EVENT_SERVER_URL'])
 ```
 
 ### Create a `$set` user event and send it to Event Server
@@ -111,7 +110,7 @@ View [Google Group](https://groups.google.com/group/predictionio-user)
 
 ## Issue Tracker
 
-Use [JIRA](https://predictionio.atlassian.net) or [GitHub Issues](https://github.com/PredictionIO/PredictionIO-Ruby-SDK/issues).
+Use [GitHub Issues](https://github.com/voran/predictionio-simple/issues).
 
 ## Contributing
 
@@ -119,8 +118,7 @@ We follow the [git-flow]
 (http://nvie.com/posts/a-successful-git-branching-model/) model where all
 active development goes to the develop branch, and releases go to the master
 branch. Pull requests should be made against the develop branch and include
-relevant tests, if applicable. Please sign
-our [Contributor Agreement](http://prediction.io/cla) before submitting a pull request.
+relevant tests, if applicable.
 
 ## License
 
