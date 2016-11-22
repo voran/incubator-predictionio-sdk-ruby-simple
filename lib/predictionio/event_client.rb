@@ -84,7 +84,9 @@ module PredictionIO
     # - a 60-second timeout for each HTTP(S) connection (thread_timeout)
     def initialize(access_key, apiurl = 'http://localhost:7070')
       @access_key = access_key
-      @http = PredictionIO::Connection.new(URI(apiurl))
+      @http = PredictionIO::Connection.new(URI(apiurl)) do |faraday|
+       yield faraday if block_given?
+     end
     end
 
     # Returns PredictionIO's status in string.

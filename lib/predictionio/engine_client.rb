@@ -49,7 +49,9 @@ module PredictionIO
     # - API entry point at http://localhost:8000 (apiurl)
     # - a 60-second timeout for each HTTP(S) connection (thread_timeout)
     def initialize(apiurl = 'http://localhost:8000')
-      @http = PredictionIO::Connection.new(URI(apiurl))
+      @http = PredictionIO::Connection.new(URI(apiurl)) do |faraday|
+        yield faraday if block_given?
+      end
     end
 
 

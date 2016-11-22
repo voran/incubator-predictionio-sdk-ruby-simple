@@ -11,6 +11,7 @@ module PredictionIO
         faraday.request  :url_encoded             # form-encode POST params
         faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+        yield faraday if block_given?
       end
       @connection.headers['Content-Type'] = 'application/json; charset=utf-8'
     end
