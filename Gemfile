@@ -8,5 +8,5 @@ group :test do
 end
 
 group :doc do
- gem 'rdoc', '~> 4.0.0'
+ gem 'rdoc', '~> 5.0.0'
 end
