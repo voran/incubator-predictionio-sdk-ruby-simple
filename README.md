@@ -2,11 +2,15 @@
 
 [![Code Climate](https://codeclimate.com/github/voran/incubator-predictionio-sdk-ruby-simple.png)](https://codeclimate.com/github/voran/incubator-predictionio-sdk-ruby-simple)
 [![Dependency Status](https://gemnasium.com/voran/incubator-predictionio-sdk-ruby-simple.svg)](https://gemnasium.com/voran/incubator-predictionio-sdk-ruby-simple)
-[![Gem Version](https://badge.fury.io/rb/predictionio-simple.svg)](http://badge.fury.io/rb/predictionio)
+[![Gem Version](https://badge.fury.io/rb/predictionio-simple.svg)](http://badge.fury.io/rb/predictionio-simple)
 
 The Ruby SDK provides a simple wrapper for the PredictionIO API.
 It allows you to quickly record your users' behavior
 and retrieve personalized predictions for them.
+
+## Why use this sdk over the official one?
+* The official SDK forces an async architecture on you. It spins threads regardless of whether you use the blocking or async methods. We believe that async requests should be outside the scope of the client and be handled by the consumer. Also, we found that it doesn't handle transient failure very well.
+* The official SDK uses raw Net::HTTP. This client uses Faraday which you may configure any way you like (see examples below).
 
 ## Documentation
 Please see the [PredictionIO App Integration Overview](http://docs.prediction.io/appintegration/) to understand how the SDK can be used to integrate PredictionIO Event Server and Engine with your application.
@@ -24,7 +28,7 @@ gem install predictionio-simple
 Or using [Bundler](http://bundler.io/) with:
 
 ```
-gem 'predictionio-simple', '0.9.6'
+gem 'predictionio-simple', '~> 0.10.0.1'
 ```
 
 ## Sending Events to Event Server
@@ -42,6 +46,11 @@ ENV['PIO_ACCESS_KEY'] = 'YOUR_ACCESS_KEY' # Find your access key with: `$ pio ap
 
 # Create PredictionIO event client.
 client = PredictionIO::EventClient.new(ENV['PIO_ACCESS_KEY'], ENV['PIO_EVENT_SERVER_URL'])
+
+# Or optionally pass a block to configure faraday
+client = PredictionIO::EventClient.new(ENV['PIO_ACCESS_KEY'], ENV['PIO_EVENT_SERVER_URL']) do |faraday|
+  faraday.response :logger                  # log requests to STDOUT
+end
 ```
 
 ### Create a `$set` user event and send it to Event Server
@@ -80,11 +89,6 @@ client.create_event(
 )
 ```
 
-### Asynchronous request
-
-To send an async request, simply use the `acreate_event` method instead of `create_event`. Be aware that the
-asynchronous method does not throw errors. It's best to use the synchronous method when first getting started.
-
 ## Query PredictionIO Engine
 
 ### Connect to the Engine:
@@ -95,6 +99,11 @@ ENV['PIO_ENGINE_URL'] = 'http://localhost:8000'
 
 # Create PredictionIO engine client.
 client = PredictionIO::EngineClient.new(ENV['PIO_ENGINE_URL'])
+
+# Or optionally pass a block to configure faraday
+client = PredictionIO::EngineClient.new(ENV['PIO_ENGINE_URL']) do |faraday|
+  faraday.response :logger                  # log requests to STDOUT
+end
 ```
 
 ### Send a prediction query to the engine and get the predicted result:
@@ -103,10 +112,6 @@ client = PredictionIO::EngineClient.new(ENV['PIO_ENGINE_URL'])
 # Get 5 recommendations for items similar to 10, 20, 30.
 response = client.send_query(items: [10, 20, 30], num: 5)
 ```
-
-## Forum
-
-View [Google Group](https://groups.google.com/group/predictionio-user)
 
 ## Issue Tracker
 
