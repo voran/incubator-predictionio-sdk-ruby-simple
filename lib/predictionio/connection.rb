@@ -9,7 +9,6 @@ module PredictionIO
     def initialize(uri)
       @connection = Faraday.new(:url => uri) do |faraday|
         faraday.request  :url_encoded             # form-encode POST params
-        faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
         yield faraday if block_given?
       end
