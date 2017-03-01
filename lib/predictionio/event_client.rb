@@ -113,6 +113,15 @@ module PredictionIO
       ))
     end
 
+    # Request to delete an event and return the response.
+    #
+    # Corresponding REST API method: DELETE events/<your_eventId>.json
+    def delete_event(event_id)
+      @http.delete(PredictionIO::Request.new(
+        "/events/#{event_id}.json?accessKey=#{@access_key}"
+      ))
+    end
+
     # Request to set properties of a user and return the response.
     #
     # Corresponding REST API method: POST /events.json

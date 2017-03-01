@@ -85,6 +85,16 @@ describe PredictionIO do
       response = event_client.delete_item('foobar')
       expect{ response }.to_not raise_error
     end
+
+    it 'delete_item should delete an item' do
+      response = event_client.delete_event('foo')
+      expect(response.status).to eq(200)
+    end
+
+    it 'delete_item should not raise an error' do
+      response = event_client.delete_event('foo')
+      expect{ response }.to_not raise_error
+    end
   end
 
   describe 'Engine Client' do
