@@ -60,7 +60,10 @@ RSpec.configure do |config|
       .to_return(status: 201, body: JSON.generate(eventId: 'deadbeef07'))
 
     stub_request(:delete, 'http://fakeapi.com:7070/events/foo.json?accessKey=1')
-      .to_return(status: 200, body: JSON.generate(eventId: 'deadbeef07'))
+      .to_return(status: 200, body: JSON.generate(message: 'Found'))
+
+    stub_request(:get, 'http://fakeapi.com:7070/events.json?accessKey=1&foo=bar')
+      .to_return(status: 200, body: JSON.generate([]))
 
     # Engine Instance
     stub_request(:post, 'http://fakeapi.com:8000/queries.json')

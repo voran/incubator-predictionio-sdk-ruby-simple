@@ -1,3 +1,3 @@
 module PredictionIO
-  VERSION = '0.10.0.7'
+  VERSION = '0.10.0.8'
 end

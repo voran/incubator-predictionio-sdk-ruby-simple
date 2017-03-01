@@ -122,6 +122,13 @@ module PredictionIO
       ))
     end
 
+    # Corresponding REST API method: GET events.json
+    def find_events(params = {})
+      @http.get(PredictionIO::Request.new(
+        '/events.json', params.merge('accessKey' => @access_key)
+      ))
+    end
+
     # Request to set properties of a user and return the response.
     #
     # Corresponding REST API method: POST /events.json
